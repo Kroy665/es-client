@@ -1,0 +1,40 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "es_client"  # The name used for installation (pip install codefast_client) and import
+version = "0.1.0"         # Initial version. INCREMENT THIS for new releases!
+authors = [
+  { name="Koushik Roy", email="kroy963@gmail.com" },
+]
+description = "A client library for the CodeFast AI v2 API."
+readme = "README.md"
+requires-python = ">=3.7" # Your code uses f-strings and type hints
+license = { file = "LICENSE" } # Assumes you have a LICENSE file
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+dependencies = [
+    "requests>=2.20.0", # Your code depends on the requests library
+]
+keywords = ["codefast", "api", "client", "upload"]
+
+[project.urls]
+Homepage = "https://github.com/Kroy665/es-client.git"
+Repository = "https://github.com/Kroy665/es-client.git"
+
+[tool.setuptools.packages.find]
+where = ["src"]
