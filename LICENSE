@@ -1,0 +1,47 @@
+Copyright (c) 2025 Koushik Roy
+
+**Preamble**
+
+This license governs the use of the software package named "es_client" (hereafter referred to as "the Software"), authored and provided by Koushik Roy (hereafter referred to as "the Licensor"). By downloading, installing, accessing, or using the Software, you (hereafter referred to as "the Licensee") agree to be bound by the terms of this license. If you do not agree to these terms, do not use the Software.
+
+**Definitions**
+
+*   **Software:** Refers to the es_client Python package, including its source code, object code, documentation, and any accompanying files provided by the Licensor.
+*   **Personal Use:** Refers to using the Software for internal, non-commercial purposes by an individual or within the Licensee's own organization. It explicitly excludes making the Software's functionality available to third parties, whether for free or for a fee, as part of a service or product.
+*   **Modification:** Refers to any changes made to the Software's source code, including additions, deletions, or alterations.
+*   **Distribution:** Refers to providing copies of the Software, whether in original or modified form, to any third party by any means.
+*   **Sale / Sell:** Refers to exchanging the Software, whether in original or modified form, for money, services, or any other form of consideration.
+
+**Grant of Rights**
+
+Subject to the terms and conditions of this license, the Licensor grants the Licensee a non-exclusive, non-transferable, royalty-free, limited license to:
+
+1.  **Read:** Access and read the source code of the Software.
+2.  **Use:** Install and use the original, unmodified Software for any lawful purpose, including Personal Use and internal commercial use within the Licensee's organization, provided such use does not constitute prohibited Sale or Distribution as defined herein.
+3.  **Modify for Personal Use:** Create Modifications of the Software *solely* for the Licensee's Personal Use.
+
+**Restrictions**
+
+The Licensee is explicitly prohibited from doing the following:
+
+1.  **No Sale:** The Licensee may not Sell the Software, whether in its original form or with Modifications.
+2.  **No Distribution:** The Licensee may not Distribute the Software, whether in its original form or with Modifications. This includes, but is not limited to, hosting the Software for download, bundling it with other products for external parties, or transferring copies to third parties. (Note: Obtaining the software from its official distribution point, e.g., PyPI, is permitted; this restriction applies to *further* distribution by the Licensee).
+3.  **No Sublicensing:** The Licensee may not sublicense any rights granted under this license.
+4.  **Use of Modifications:** Modifications created by the Licensee may *only* be used for Personal Use and are subject to all restrictions of this license, including the prohibitions on Sale and Distribution.
+5.  **Removal of Notices:** The Licensee may not remove or alter any copyright, trademark, or other proprietary notices contained within the Software.
+
+**No Warranty**
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**Limitation of Liability**
+
+IN NO EVENT SHALL THE LICENSOR BE LIABLE TO THE LICENSEE OR ANY THIRD PARTY FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND (INCLUDING, BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF DATA OR ANY OTHER PECUNIARY LOSS), WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY OR OTHERWISE, ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+**Termination**
+
+This license is effective until terminated. The Licensee's rights under this license will terminate automatically without notice from the Licensor if the Licensee fails to comply with any term(s) of this license. Upon termination, the Licensee must cease all use of the Software and destroy all copies, full or partial, including any Modifications, of the Software.
+
+**Governing Law**
+
+This license shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.

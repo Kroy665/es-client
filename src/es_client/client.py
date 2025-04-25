@@ -4,6 +4,7 @@ import requests
 import json
 import os
 import logging # Use logging instead of print for libraries
+from typing import Union
 
 # Configure basic logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -100,12 +101,14 @@ class CodeFastClient:
             raise AuthenticationError(f"An unexpected error occurred during authentication: {e}") from e
 
 
-    def upload_file(self, file_path: str) -> dict:
+    def upload_file(self, file_path: str = None, file_name: str = None, file_content: Union[str, bytes] = None) -> dict:
         """
         Uploads a file to the CodeFast API.
 
         Args:
-            file_path (str): The path to the file to upload.
+            file_path (str, optional): The path to the file to upload. Defaults to None.
+            file_name (str, optional): The name of the file to upload. Defaults to None.
+            file_content (str, optional): The content of the file to upload. Defaults to None.
 
         Returns:
             dict: The JSON response from the server upon successful upload.
@@ -125,14 +128,32 @@ class CodeFastClient:
                 # Content-Type for multipart/form-data is set automatically by requests
             }
 
-            if not os.path.exists(file_path):
-                log.error(f"File not found at path: {file_path}")
-                raise FileNotFoundError(f"File not found at '{file_path}'")
+            if not file_path and not file_content:
+                log.error("No file path or file content provided.")
+                raise ValueError("Either file_path or file_content must be provided.")
 
-            with open(file_path, 'rb') as f:
-                file_name = os.path.basename(file_path)
+            if not file_path:
+                # Using file_content approach
+                log.info("Using provided file content instead of file path")
+                if not file_name:
+                    log.error("File name not provided when using file content.")
+                    raise ValueError("File name must be provided when using file content.")
+                
+                # 1. Prepare file content (ensure it's bytes)
+                file_bytes: bytes = file_content
+                content_type: str = 'text/plain; charset=utf-8'
+                if isinstance(file_content, str):
+                    try:
+                        file_bytes = file_content.encode('utf-8')
+                        # If no content type provided and it's text, default to text/plain
+                    except UnicodeEncodeError as e:
+                        raise ValueError(f"Could not encode string content to UTF-8: {e}") from e
+                # else:
+                #     raise TypeError(f"file_content must be bytes or str, not {type(file_content).__name__}")
+
+                # 2. Prepare file metadata
                 files = {
-                    'file': (file_name, f, 'application/octet-stream') # Explicit MIME type often helps
+                    'file': (file_name, file_bytes, content_type)
                 }
 
                 log.info(f"Uploading '{file_name}' to {upload_url}...")
@@ -140,8 +161,8 @@ class CodeFastClient:
 
                 log.info(f"Upload response status code: {response.status_code}")
                 if not response.ok:
-                     # Log detailed error response from server
-                     log.error(f"Upload failed. Status: {response.status_code}, Response: {response.text}")
+                    # Log detailed error response from server
+                    log.error(f"Upload failed. Status: {response.status_code}, Response: {response.text}")
 
                 response.raise_for_status() # Raises HTTPError for 4xx/5xx responses
 
@@ -152,6 +173,39 @@ class CodeFastClient:
                 except json.JSONDecodeError:
                     log.error(f"Failed to decode JSON response from upload endpoint: {response.text}")
                     raise UploadError("Invalid JSON response received from upload endpoint after successful status.")
+
+
+
+            else:
+                # Check if file exists before attempting to open it
+                if not os.path.isfile(file_path):
+                    log.error(f"File not found at path: {file_path}")
+                    raise FileNotFoundError(f"File not found at path: {file_path}")
+                    
+                with open(file_path, 'rb') as f:
+                    # Use provided file_name or extract from path
+                    actual_file_name = file_name or os.path.basename(file_path)
+                    files = {
+                        'file': (actual_file_name, f, 'application/octet-stream') # Explicit MIME type often helps
+                    }
+
+                    log.info(f"Uploading '{actual_file_name}' to {upload_url}...")
+                    response = requests.post(upload_url, headers=headers, files=files)
+
+                    log.info(f"Upload response status code: {response.status_code}")
+                    if not response.ok:
+                        # Log detailed error response from server
+                        log.error(f"Upload failed. Status: {response.status_code}, Response: {response.text}")
+
+                    response.raise_for_status() # Raises HTTPError for 4xx/5xx responses
+
+                    try:
+                        response_data = response.json()
+                        log.info(f"File '{actual_file_name}' uploaded successfully.")
+                        return response_data
+                    except json.JSONDecodeError:
+                        log.error(f"Failed to decode JSON response from upload endpoint: {response.text}")
+                        raise UploadError("Invalid JSON response received from upload endpoint after successful status.")
 
         except requests.exceptions.HTTPError as http_err:
             # HTTP errors (like 4xx, 5xx) are caught here after raise_for_status

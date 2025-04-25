@@ -21,6 +21,12 @@ client = CodeFastClient(email="your_email@example.com", team_slug="your_team_slu
 client._get_token()
 
 # Upload file
-client.upload_file("path/to/your/file.txt")
+client.upload_file(file_path="path/to/your/file.txt", file_name="file.txt", file_content=None)
+
+# Upload file from bytes
+client.upload_file(file_path=None, file_name="file.txt", file_content=b"This is a test file.")
+
+# Upload file from string
+client.upload_file(file_path=None, file_name="file.txt", file_content="This is a test file.")
 ```
 
